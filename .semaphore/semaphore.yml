@@ -6,7 +6,7 @@ agent:
     os_image: ubuntu1804
 
 blocks:
-  - name: NGINX
+  - name: Nginx
     dependencies: []
     task:
       jobs:
@@ -21,7 +21,7 @@ blocks:
 
   - name: Publish Nginx image
     dependencies:
-        - NGINX
+        - Nginx
     task:
       jobs:
       - name: Docker Hub
