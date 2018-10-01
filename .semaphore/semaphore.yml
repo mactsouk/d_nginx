@@ -19,11 +19,12 @@ blocks:
           - docker info
           - echo $APP_ENV
 
-#  - name: Publish Nginx image
-#    dependencies:
-#        - Nginx
-#    task:
-#      jobs:
-#        - name: Docker Hub
-#          - echo "done"
+  - name: Publish Nginx image
+    dependencies:
+        - Nginx
+    task:
+      jobs:
+      - name: Docker Hub
+        commands:
+          - echo "done"
 
