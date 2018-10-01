@@ -1,0 +1,29 @@
+version: v1.0
+name: Creating Docker images
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+blocks:
+  - name: Ngnix
+    dependencies: []
+    task:
+      env_vars:
+        - name: APP_ENV
+          value: prod
+      jobs:
+      - name: Docker build
+        commands:
+          - checkout
+          - docker info
+          - echo $APP_ENV
+
+  - name: Publish Nginx image
+    dependencies:
+        - Nginx
+    task:
+      jobs:
+        - name: Docker Hub
+          - echo "done"
+
