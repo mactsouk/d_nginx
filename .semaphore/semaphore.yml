@@ -6,22 +6,22 @@ agent:
     os_image: ubuntu1804
 
 blocks:
-  - name: Ngnix
+  - name: A
     dependencies: []
     task:
-      env_vars:
-        - name: APP_ENV
-          value: prod
       jobs:
       - name: Docker build
         commands:
           - checkout
           - docker info
           - echo $APP_ENV
+      env_vars:
+        - name: APP_ENV
+          value: prod
 
   - name: Publish Nginx image
     dependencies:
-        - Nginx
+        - A
     task:
       jobs:
       - name: Docker Hub
