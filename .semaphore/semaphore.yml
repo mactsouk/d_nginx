@@ -16,7 +16,7 @@ blocks:
           - docker info
           - echo $APP_ENV
           - docker build -t nginx_static:v1 .
-          - docker image
+          - docker images
       env_vars:
         - name: APP_ENV
           value: prod
