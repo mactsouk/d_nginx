@@ -17,6 +17,8 @@ blocks:
           - echo $APP_ENV
           - docker build -t nginx_static:v1 .
           - docker images
+          - docker save nginx_static -o /tmp/nginx_static
+          - ls -l /tmp/nginx_static
       env_vars:
         - name: APP_ENV
           value: prod
@@ -29,14 +31,4 @@ blocks:
       - name: Docker Hub
         commands:
           - echo "done"
-
-  - name: Save Nginx image
-    dependencies:
-        - Nginx
-    task:
-      jobs:
-      - name: Save locally
-        commands:
-          - docker save nginx_static -o /tmp/nginx_static
-          - ls -l /tmp/nginx_static
 
