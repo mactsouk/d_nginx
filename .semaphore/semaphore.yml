@@ -30,3 +30,13 @@ blocks:
         commands:
           - echo "done"
 
+  - name: Save Nginx image
+    dependencies:
+        - Nginx
+    task:
+      jobs:
+      - name: Save locally
+        commands:
+          - docker save nginx_static -o /tmp/nginx_static
+          - ls -l /tmp/nginx_static
+
