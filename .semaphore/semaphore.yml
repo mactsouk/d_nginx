@@ -14,14 +14,10 @@ blocks:
         commands:
           - checkout
           - docker info
-          - echo $APP_ENV
           - docker build -t nginx_static:v1 .
           - docker images
           - docker save nginx_static -o /tmp/nginx_static
           - ls -l /tmp/nginx_static
-      env_vars:
-        - name: APP_ENV
-          value: prod
 
   - name: Publish Nginx image
     dependencies:
@@ -30,5 +26,15 @@ blocks:
       jobs:
       - name: Docker Hub
         commands:
-          - echo "done"
+          - checkout
+          - docker info
+          - docker build -t nginx_static:v1 .
+          - docker images
+          - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+          - docker tag nginx_static:v1 "$DOCKER_USERNAME"/semaphore
+          - docker pull "$DOCKER_USERNAME"/semaphore
+          - docker images
+
+      secrets:
+      - name: docker-hub
 
